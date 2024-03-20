@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+{% load cats_template_tags %}
 <html lang="en">
     <head>
     <meta charset="utf-8">
@@ -41,9 +42,7 @@
                 <nav class="col-md-2 d-none d-md-block bg-light sidebar">
                     <div class="sidebar-sticky">
                     {% block sidebar_block %}
-                        {% for student in students %}
-                        <a href="{% url 'cats:student_profile' student.name_slug %}">{{ student.name }}</a>
-                        {% endfor %}
+                    {% get_student_list %}
                     {% endblock %}
                     </div>
                 </nav>

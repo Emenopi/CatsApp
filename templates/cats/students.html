@@ -1,0 +1,9 @@
+<ul>
+    {% if students %}
+    {% for student in students %}
+    <li><a href="{% url 'cats:student_profile' student.name_slug %}">{{ student.forename }} {{ student.surname }}</a></li>
+    {% endfor %}
+    {% else %}
+    <li><strong>There are no students.</strong></li>
+    {% endif %}
+</ul>
