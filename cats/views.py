@@ -13,7 +13,9 @@ def index(request):
     return response
 
 def cats_list(request):
+    cats_list = Cat.objects.order_by('name')
     context_dict = {}
     context_dict['title'] = "All the cats are:"
+    context_dict['cats'] = cats_list
     response = render(request, 'cats/cats.html', context=context_dict)
     return response

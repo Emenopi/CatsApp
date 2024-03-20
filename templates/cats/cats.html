@@ -1,1 +1,19 @@
+{% extends 'cats/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
 List of Cats
+{% endblock %}
+
+{% block body_block %}
+<img src="{% static 'images/cat.png' %}" alt="Picture of Cat" />
+    <h1>{{ title }} </h1>
+    {% if cats %}
+    <ul>
+        {% for cat in cats %}
+        <li>{{ cat.name }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <a href="{% url 'cats:cats' %}">About Pets of Students</a>
+{% endblock %}
