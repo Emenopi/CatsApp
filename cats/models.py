@@ -12,7 +12,7 @@ class Student(models.Model):
 class Cat(models.Model):
     DEFAULT_MAX_LEN = 128
     name = models.CharField(max_length=DEFAULT_MAX_LEN)
-    age = models.IntegerField
+    age = models.IntegerField(default=0)
     picture = models.ImageField(upload_to='profile_images', blank=True)
     owner = models.ForeignKey(Student, on_delete=models.CASCADE)
 
