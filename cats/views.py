@@ -29,3 +29,12 @@ def show_cat_profile(request, cat_slug):
     except Cat.DoesNotExist:
         context_dict['picture'] = None
     return render(request, 'cats/cat.html', context=context_dict)
+
+def show_student_profile(request, student_name_slug):
+    context_dict = {}
+    try:
+        student = Student.objects.get(name_slug=student_name_slug)
+        context_dict['student'] = student
+    except Student.DoesNotExist:
+        context_dict['student'] = None
+    return render(request, 'cats/student.html', context=context_dict)

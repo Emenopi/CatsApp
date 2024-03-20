@@ -6,6 +6,13 @@ class Student(models.Model):
     forename = models.CharField(max_length=DEFAULT_MAX_LEN)
     surname = models.CharField(max_length=DEFAULT_MAX_LEN)
     numCats = models.IntegerField(default=0)
+    name_slug = models.SlugField(unique=True)
+
+    def save(self, *args, **kwargs):
+        forenameSlug = slugify(self.forename)
+        surnameSlug = slugify(self.surname)
+        self.name_slug = forenameSlug + "_" + surnameSlug
+        super(Student, self).save(*args, **kwargs)
     
     def __str__(self):
         return self.forename + " " + self.surname
