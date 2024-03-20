@@ -5,7 +5,7 @@ def index(request):
     context_dict = {}
     context_dict['title'] = "The students and their cats are:"
     response = render(request, 'cats/index.html', context=context_dict)
-    return HttpResponse("Index")
+    return response
 
 def cats_list(request):
     context_dict = {}
