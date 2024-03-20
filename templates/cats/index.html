@@ -8,4 +8,18 @@ Home
 {% block body_block %}
 <img src="{% static 'images/cat.png' %}" alt="Picture of Cat" />
     <h1>{{ title }} </h1>
+    {% if students %}
+    <ul>
+        {% for student in students %}
+        <li> {{ student.forename }} {{ student.surname }}</li>
+            {% for cat in cats %}
+            {% if cat.owner == student %}
+        <ul>
+            <li>{{ cat.name }}</li>
+        </ul>
+            {% endif %}
+            {% endfor %}
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}
