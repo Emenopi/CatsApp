@@ -17,7 +17,10 @@
     {% else %}
     <img src="{% static 'images/no_picture.png' %}" alt="No Profile Photo" /><br />
     {% endif %}
+    <strong>Name: </strong>{{ cat.name }}<br />
+    <Strong>Owner: </Strong>{{ cat.owner.forename }} {{ cat.owner.surname }}<br />
+    <strong>Age: </strong>{{ cat.age }}<br /><br />
 {% endif %}
-<a href="{% url 'cats:cats' %}">Full list of cats</a>
+<a href="{% url 'cats:cats' %}">Full list of cats</a><br />
 <a href="{% url 'cats:index' %}">Home</a>
 {% endblock %}
