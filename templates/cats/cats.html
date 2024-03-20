@@ -11,7 +11,7 @@ List of Cats
     {% if cats %}
     <ul>
         {% for cat in cats %}
-        <li>{{ cat.name }}</li>
+        <li><a href="{% url 'cats:cat_profile' cat.cat_slug %}">{{ cat.name }}</a></li>
         {% endfor %}
     </ul>
     {% endif %}

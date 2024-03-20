@@ -1,0 +1,23 @@
+{% extends 'cats/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {% if cat %}
+        {{ cat.name }}
+    {% else %}
+        Unknown Cat
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+{% if cat %}
+    <h1>{{ cat.name }}'s Info </h1>
+    {% if cat.picture %}
+    <img src="{{ MEDIA_URL }}{{ cat.picture }}" width="300" height="300" alt="{{ cat.name }}'s Photo"/><br />
+    {% else %}
+    <img src="{% static 'images/no_picture.png' %}" alt="No Profile Photo" /><br />
+    {% endif %}
+{% endif %}
+<a href="{% url 'cats:cats' %}">Full list of cats</a>
+<a href="{% url 'cats:index' %}">Home</a>
+{% endblock %}
