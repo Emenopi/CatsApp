@@ -1,9 +1,9 @@
 from django.urls import path
 from cats import views
 
-app_name = 'rango'
+app_name = 'cats'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('cats_list/', views.cats_list, name='cats_list'),
+    path('cats_list/', views.cats_list, name='cats'),
 ]
