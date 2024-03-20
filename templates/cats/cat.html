@@ -15,7 +15,7 @@
     {% if cat.picture %}
     <img src="{{ MEDIA_URL }}{{ cat.picture }}" width="300" height="300" alt="{{ cat.name }}'s Photo"/><br />
     {% else %}
-    <img src="{% static 'images/no_picture.png' %}" alt="No Profile Photo" /><br />
+    <img src="{% static 'images/no_picture.png' %}" width="300" height="300" alt="No Profile Photo" /><br />
     {% endif %}
     <strong>Name: </strong>{{ cat.name }}<br />
     <Strong>Owner: </Strong>{{ cat.owner.forename }} {{ cat.owner.surname }}<br />

@@ -34,7 +34,9 @@ def show_student_profile(request, student_name_slug):
     context_dict = {}
     try:
         student = Student.objects.get(name_slug=student_name_slug)
+        cats = Cat.objects.all()
         context_dict['student'] = student
+        context_dict['cats'] = cats
     except Student.DoesNotExist:
         context_dict['student'] = None
     return render(request, 'cats/student.html', context=context_dict)

@@ -1,0 +1,31 @@
+{% extends 'cats/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+    {% if student %}
+        {{ student.forename }} {{ student.surname }}
+    {% else %}
+        Unknown Student
+    {% endif %}
+{% endblock %}
+
+{% block body_block %}
+{% if student.numCats > 0 %}
+    <ul>
+        {% for cat in cats %}
+        {% if cat.owner == student %}
+        <li>
+            {% if cat.picture %}
+            <img src="{{ MEDIA_URL }}{{ cat.picture }}" width="100" height="100" alt="{{ cat.name }}'s Photo"/><br />
+            {% else %}
+            <img src="{% static 'images/no_picture.png' %}" width="100" height="100" alt="No Profile Photo" /><br />
+            {% endif %}
+            <a href="{% url 'cats:cat_profile' cat.cat_slug %}">{{ cat.name }}</a>
+        </li>
+        {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+<a href="{% url 'cats:cats' %}">Full list of cats</a><br />
+<a href="{% url 'cats:index' %}">Home</a>
+{% endblock %}
