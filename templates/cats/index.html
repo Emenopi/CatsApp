@@ -11,7 +11,11 @@ Home
     {% if students %}
     <ul>
         {% for student in students %}
-        <li> {{ student.forename }} {{ student.surname }}</li>
+        {% if student.numCats != 1 %}
+        <li> {{ student.forename }} {{ student.surname }} has <strong>{{ student.numCats }}</strong> cats </li>
+        {% else %}
+        <li> {{ student.forename }} {{ student.surname }} has <strong>1</strong> cat </li>
+        {% endif %}
             {% for cat in cats %}
             {% if cat.owner == student %}
         <ul>
