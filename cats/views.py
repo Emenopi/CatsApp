@@ -52,16 +52,22 @@ def add_cat(request):
     cat_added = False
     
     if request.method == 'POST':
-        cat_form = CatForm(request.POST)
+        cat_form = CatForm(request.POST, request.FILES)
         student_profile = Student_Profile.objects.get(user=request.user)
         owner = student_profile.student
         if cat_form.is_valid():
             cat = cat_form.save(commit=False)
+            if 'picture' in request.FILES:
+                print("yes")
+                cat.picture = request.FILES['picture']
             cat.owner = owner
             cat.save()
+
+            owner.numCats = owner.numCats + 1
+            owner.save()
             cat_added = True
         else:
-            return HttpResponse(owner.forename)
+            return HttpResponse(cat_form.errors)
     else:
         cat_form = CatForm()
     return render(request, 'cats/add_cat.html', context={

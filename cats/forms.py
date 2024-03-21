@@ -22,6 +22,7 @@ class StudentProfileForm(forms.ModelForm):
 class CatForm(forms.ModelForm):
     name = forms.CharField(max_length=128, help_text='Please enter the cats name: ')
     age = forms.IntegerField(initial=0)
+    picture = forms.ImageField(required=False)
 
     class Meta:
         model = Cat
