@@ -98,6 +98,7 @@ def register(request):
             studentProfile.student = student            
             studentProfile.save()
             registered = True
+            login(request, user)
         else:
             print(user_form.errors, student_form.errors)
     else:
