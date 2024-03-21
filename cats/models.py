@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.template.defaultfilters import slugify
 
 class Student(models.Model):
@@ -16,6 +17,13 @@ class Student(models.Model):
     
     def __str__(self):
         return self.forename + " " + self.surname
+    
+class Student_Profile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    student = models.ForeignKey(Student, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.user.username
     
 class Cat(models.Model):
     DEFAULT_MAX_LEN = 128

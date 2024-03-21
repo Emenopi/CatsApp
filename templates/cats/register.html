@@ -1,0 +1,22 @@
+{% extends 'cats/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Register
+{% endblock %}
+
+{% block body_block %}
+<h1>Register for CatsApp</h1>
+{% if registered %}
+    Rango says: <strong>thank you for registering!</strong><br />
+    <a href="{% url 'cats:index' %}">Return Home</a><br />
+{% else %}
+    <strong>Register here!</strong><br />
+    <form id="user_form" method="post" action="{% url 'cats:register' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+        {{ student_form.as_p }}
+        <input type="submit" name="submit" value="Register" />
+    </form>
+{% endif %}
+{% endblock %}

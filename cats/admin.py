@@ -1,5 +1,5 @@
 from django.contrib import admin
-from cats.models import Student, Cat
+from cats.models import Student, Cat, Student_Profile
 
 
 class StudentAdmin(admin.ModelAdmin):
@@ -10,3 +10,4 @@ class CatAdmin(admin.ModelAdmin):
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Cat, CatAdmin)
+admin.site.register(Student_Profile)
