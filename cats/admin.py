@@ -10,4 +10,3 @@ class CatAdmin(admin.ModelAdmin):
 
 admin.site.register(Student, StudentAdmin)
 admin.site.register(Cat, CatAdmin)
-admin.site.register(Student_Profile)
