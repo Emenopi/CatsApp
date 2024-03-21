@@ -63,8 +63,8 @@ def add_cat(request):
             cat.owner = owner
             cat.save()
 
-            owner.numCats = owner.numCats + 1
-            owner.save()
+            #owner.numCats = owner.numCats + 1
+            #owner.save()
             cat_added = True
         else:
             return HttpResponse(cat_form.errors)

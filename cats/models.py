@@ -36,6 +36,8 @@ class Cat(models.Model):
     def save(self, *args, **kwargs):
         nameSlug = slugify(self.name)
         ownerSlug = slugify(self.owner.forename)
+        self.owner.numCats = self.owner.numCats + 1
+        self.owner.save()
         self.cat_slug = nameSlug + "_" + ownerSlug
         super(Cat, self).save(*args, **kwargs)
 

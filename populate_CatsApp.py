@@ -59,13 +59,13 @@ def populate():
         }
     ]
 
-    students = {'Dannielle': {'cats': dannielleCats, 'surname': 'Spears', 'numCats': 3},
-            'Taylor': {'cats': taylorCats, 'surname': 'Swift', 'numCats': 3},
-            'Cameron': {'cats': cameronCats, 'surname': 'Diaz', 'numCats': 1},
-            'Miley': {'cats': mileyCats, 'surname': 'Cyrus', 'numCats': 3}}
+    students = {'Dannielle': {'cats': dannielleCats, 'surname': 'Spears',},
+            'Taylor': {'cats': taylorCats, 'surname': 'Swift'},
+            'Cameron': {'cats': cameronCats, 'surname': 'Diaz'},
+            'Miley': {'cats': mileyCats, 'surname': 'Cyrus'}}
 
     for student, student_data in students.items():
-        s = add_student(student, student_data['surname'], student_data['numCats'])
+        s = add_student(student, student_data['surname'])
         for cat in student_data['cats']:
             add_cat(cat['name'], cat['age'], s)
 
@@ -73,9 +73,8 @@ def populate():
         for c in Cat.objects.filter(owner=s):
             print(f'- {s}: {c}')
 
-def add_student(forename, surname, numCats):
+def add_student(forename, surname):
     s = Student.objects.get_or_create(forename=forename, surname=surname)[0]
-    s.numCats = numCats
     s.save()
     return s
 
