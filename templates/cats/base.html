@@ -32,7 +32,13 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item"><a class="nav-link" href="{% url 'cats:index' %}">Home</a></li>
                         <li class="nav-item "><a class="nav-link" href="{% url 'cats:cats' %}">Cats List</a></li>
+                        {% if user.is_authenticated and user.username != 'admin' %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cats:add_cat' %}">Add Cat</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cats:logout' %}">Logout</a></li>
+                        {% else %}
+                        <li class="nav-item"><a class="nav-link" href="{% url 'cats:login' %}">Login</a></li>
                         <li class="nav-item"><a class="nav-link" href="{% url 'cats:register' %}">Register</a></li>
+                        {% endif %}
                     </ul>
                 </div>
             </nav>

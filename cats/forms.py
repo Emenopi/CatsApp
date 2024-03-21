@@ -25,4 +25,4 @@ class CatForm(forms.ModelForm):
 
     class Meta:
         model = Cat
-        exclude = ('owner', 'cat_slug')
+        exclude = ('owner', 'cat_slug',)

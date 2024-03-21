@@ -1,0 +1,21 @@
+{% extends 'cats/base.html' %}
+{% load staticfiles %}
+
+{% block title_block %}
+Add Cat
+{% endblock %}
+
+{% block body_block %}
+<h1>Add Cat</h1>
+{% if cat_added %}
+    <strong>Cat added successfully!</strong><br />
+    <a href="{% url 'cats:index' %}">Return Home</a><br />
+{% else %}
+    <strong>Add your cat!</strong><br />
+    <form id="cat_form" method="post" action="{% url 'cats:add_cat' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ cat_form.as_p }}
+        <input type="submit" name="submit" value="Add cat" />
+    </form>
+{% endif %}
+{% endblock %}

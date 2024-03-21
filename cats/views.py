@@ -1,7 +1,11 @@
-from django.shortcuts import render
-from django import forms
+from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.http import HttpResponse
-from cats.models import Student, Cat
+from django import forms
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
+from cats.models import Student, Cat, Student_Profile
 from cats.forms import UserForm, StudentForm, CatForm, StudentProfileForm
 
 def index(request):
@@ -43,6 +47,30 @@ def show_student_profile(request, student_name_slug):
         context_dict['student'] = None
     return render(request, 'cats/student.html', context=context_dict)
 
+@login_required(login_url='cats:login')
+def add_cat(request):
+    cat_added = False
+    
+    if request.method == 'POST':
+        cat_form = CatForm(request.POST)
+        student_profile = Student_Profile.objects.get(user=request.user)
+        owner = student_profile.student
+        if cat_form.is_valid():
+            cat = cat_form.save(commit=False)
+            cat.owner = owner
+            cat.save()
+            cat_added = True
+        else:
+            return HttpResponse(owner.forename)
+    else:
+        cat_form = CatForm()
+    return render(request, 'cats/add_cat.html', context={
+                                                            'cat_form': cat_form,
+                                                            'cat_added': cat_added,
+                                                            'user': request.user,
+                                                        })
+
+
 def register(request):
     registered = False
 
@@ -76,3 +104,24 @@ def register(request):
                                                             'student_form': student_form,
                                                             'registered': registered
                                                         })
+
+def user_logout(request):
+    logout(request)
+    return redirect(reverse('cats:index'))
+
+def user_login(request):
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                login(request, user)
+            return redirect(reverse('cats:index'))
+        else:
+            print(f"Invalid login details: {username}, {password}")
+            return HttpResponse("Invalid login details...Try again!")
+    else:
+        return render(request, 'cats/login.html')
